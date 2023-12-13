@@ -12,8 +12,8 @@ def janela_menu():
                [sg.B("Salvar")],
                [sg.B("Exit")]]
 
-    layout = [[sg.Frame("", layout=buttons)]]
-    return sg.Window("Menu", layout=layout, finalize=True)
+    # layout = [[sg.Frame("", layout=buttons)]]
+    return sg.Window("Menu", layout=buttons, finalize=True)
 
 
 def janela_estoque():
@@ -44,7 +44,7 @@ def janela_cadastro():
 
 def janela_remover():
 
-    nome_produtos = [f"{produto.nome} - R$ {produto.valor:.2f} - {produto.setor}"
+    nome_produtos = [f"{produto.nome} -- R$ {produto.valor:.2f} -- {produto.setor}"
                      for produto in produtos_]
 
     layout = [[sg.Text("Escolha um produto para remover:"),
@@ -95,10 +95,11 @@ while True:
             janela2["-OUT-"].update("Produto adicionado!")
         # remover
         elif event == "Apply":
-
+            i = 0
             for produto in produtos_.copy():
-                if produto.nome == values["-REMOV-"]:
-                    produtos_.remove(produto)
+                if produto.nome in values["-REMOV-"]:
+                    del produtos_[i]
+                i += 1
             janela2["-OUT-"].update("Produto removido!")
 
 
