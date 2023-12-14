@@ -3,6 +3,8 @@ from main import *
 
 
 produtos_: list = load_pkl()
+setores: tuple = ('alimentos', 'higiene', 'brinquedos', 'bebidas', 'outros')
+
 
 def janela_menu():
     buttons = [[sg.B("Ver estoque")],
@@ -36,7 +38,7 @@ def janela_estoque():
 def janela_cadastro():
     layout = [[sg.Text("Nome do produto:"), sg.I("", key="-NAME-")],
               [sg.Text("Valor do produto:"), sg.I("", key="-PRECO-")],
-              [sg.Text("Setor do produto:"), sg.I("", key="-SETOR-")],
+              [sg.Text("Setor do produto:"), sg.Combo(setores, key="-SETOR-")],
               [sg.Text("", key="-OUT-", justification='center')],
               [sg.B("Voltar"), sg.B("Submit")]]
     return sg.Window("Cadastro", layout=layout, finalize=True)
